@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'crud_operation.dart';
 import 'note.dart';
+import 'noti.dart';
 
 class NoteList extends StatefulWidget {
-
   @override
   NoteListState createState() {
     return new NoteListState();
@@ -11,7 +11,6 @@ class NoteList extends StatefulWidget {
 }
 
 class NoteListState extends State<NoteList> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,21 +27,62 @@ class NoteListState extends State<NoteList> {
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Note(NoteMode.Editing, notes[index])
-                      ));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                Note(NoteMode.Editing, notes[index])));
                   },
-                  child: Card(
+                  child: Container(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 30.0, bottom: 30, left: 13.0, right: 22.0),
+                      padding: const EdgeInsets.only(
+                          top: 5.0, bottom: 5, left: 10.0, right: 22.0),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          _NoteTitle(notes[index]['title']),
-                          Container(height: 4,),
-                          _NoteText(notes[index]['text'])
-                        ],
-                      ),
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Row(children: <Widget>[
+                              new Expanded(
+                                  child: new Container(
+                                height: 100,
+                                decoration: new BoxDecoration(
+                                    borderRadius:
+                                        new BorderRadius.circular(10.0),
+                                    color: Colors.blue),
+                                child: new Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    _NoteTitle(notes[index]['title']),
+                                    Container(
+                                      height: 4,
+                                    ),
+                                    _NoteText(notes[index]['text']),
+                                  ],
+                                ),
+                              )),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 2.0,
+                                  ),
+                              ),
+                              new Expanded(
+                                  child: new Container(
+                                height: 10,
+                                decoration: new BoxDecoration(
+                                    borderRadius:
+                                        new BorderRadius.circular(10.0),
+                                    color: Colors.blue),
+                                child: new Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    _NoteTitle(notes[index]['title']),
+                                    Container(
+                                      height: 4,
+                                    ),
+                                    _NoteText(notes[index]['text']),
+                                  ],
+                                ),
+                              )),
+                            ])
+                          ]),
                     ),
                   ),
                 );
@@ -56,9 +96,9 @@ class NoteListState extends State<NoteList> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Note(NoteMode.Adding, null)
-          ));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Note(NoteMode.Adding, null)));
         },
         child: Icon(Icons.add),
       ),
@@ -70,15 +110,12 @@ class _NoteTitle extends StatelessWidget {
   final String _title;
 
   _NoteTitle(this._title);
-  
+
   @override
   Widget build(BuildContext context) {
     return Text(
       _title,
-      style: TextStyle(
-        fontSize: 25,
-        fontWeight: FontWeight.bold
-      ),
+      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
     );
   }
 }
@@ -92,9 +129,7 @@ class _NoteText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       _text,
-      style: TextStyle(
-          color: Colors.grey.shade600
-      ),
+      style: TextStyle(color: Colors.grey.shade600),
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
     );
